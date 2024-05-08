@@ -6,6 +6,7 @@ from typing import Any
 
 from comtypes import COMMETHOD  # type: ignore
 from comtypes import GUID
+from comtypes import CoInitialize
 from comtypes import COMError
 from comtypes import IUnknown
 from comtypes import client
@@ -62,6 +63,7 @@ def find_cameras():
     # Reference
     # https://learn.microsoft.com/en-us/windows/win32/directshow/selecting-a-capture-device
 
+    CoInitialize()  # fixes CoInitialize has not been called
     system_device_enum: Any = client.CreateObject(
         clsids.CLSID_SystemDeviceEnum, interface=ICreateDevEnum
     )
